@@ -70,3 +70,13 @@ Yönetim (`src/routes/admin*.tsx`): `/admin`, `/admin/urunler`, `/admin/urunler/
 - Ürün görselleri kategori başına tek görseldir (demo); ürün adları, markalar ve teknik değerler kurgusaldır.
 - Site ayarları sayfası vitrini canlı değiştirmez (kaynak `site.ts`).
 - Ürün/kategori/sipariş görünümleri 3 temel kırılımda test edildi (masaüstü, mobil 390px); tablet için özel düzen ayarı yapılmadı, fluid grid kullanılır.
+
+## Sunum için yayın (GitHub Pages)
+
+`.github/workflows/pages.yml`, `main`'e her gönderimde statik bir demo derler ve GitHub Pages'e yayınlar (adresler `#` ile başlar, ör. `…/moto-store/#/urunler`). Elle denemek için:
+
+```sh
+PAGES=1 VITE_STATIC=1 npm run build:pages   # çıktı: dist/client
+```
+
+Bu yalnızca sunum içindir (mock verilerle). Gerçek yayın, SSR derlemesi (`npm run build`) ile Cloudflare üzerinde yapılacaktır.

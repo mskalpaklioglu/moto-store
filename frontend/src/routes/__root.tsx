@@ -65,7 +65,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             Tekrar dene
           </button>
           <a
-            href="/"
+            href={import.meta.env.BASE_URL}
             className="inline-flex h-10 items-center justify-center rounded-md border border-input px-5 text-sm font-semibold transition-colors hover:bg-accent"
           >
             Ana sayfaya dön
@@ -102,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.svg`, type: "image/svg+xml" },
     ],
   }),
   shellComponent: RootShell,

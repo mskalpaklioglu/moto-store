@@ -5,7 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { nitro } from "nitro/vite";
 
+// PAGES=1 builds a static single-page demo (GitHub Pages): relative asset paths and
+// hash-based URLs (set VITE_STATIC=1 too), so it works from any sub-folder.
+// The default build is the full SSR app.
+const staticDemo = process.env.PAGES === "1";
+
 export default defineConfig({
+  base: staticDemo ? "./" : "/",
   plugins: [
     tailwindcss(),
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
@@ -16,8 +22,9 @@ export default defineConfig({
         behavior: "error",
         client: { files: ["**/server/**"], specifiers: ["server-only"] },
       },
+      ...(staticDemo ? { spa: { enabled: true } } : {}),
     }),
-    nitro(),
+    ...(staticDemo ? [] : [nitro()]),
     viteReact(),
   ],
   resolve: {
